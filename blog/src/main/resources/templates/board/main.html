@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 800px">
+    <div class="py-5 text-center">
+        <h2>나의 작은 게시판</h2>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table text-center">
+            <thead>
+            <tr class="text-center">
+                <th style="width: 10%">번호</th>
+                <th style="width: 60%">제목</th>
+                <th style="width: 15%">글쓴이</th>
+                <th style="width: 15%">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td><a href="item.html" th:href="@{/basic/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">글 번호</a></td>
+                <td><a href="item.html" th:href="@{|/basic/items/${item.id}|}" th:text="${item.title}">제목</a></td>
+                <td th:text="${item.name}">작성자</td>
+                <td th:text="${item.date}">작성일</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-5">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    th:onclick="|location.href='@{/board/create}'|"
+                    type="button">글 등록</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
