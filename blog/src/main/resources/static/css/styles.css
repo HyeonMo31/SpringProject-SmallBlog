@@ -1,0 +1,8 @@
+#titleDeco:hover {
+    cursor:pointer;
+    text-decoration: underline
+}
+
+.trBackground:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+}

@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.List;
 
 @org.springframework.stereotype.Repository
@@ -19,6 +20,19 @@ public class JdbcRepository implements Repository{
     @Override
     public Post save(Post post) {
         String sql = "insert into POST values(?, ?, ?, ?, ?)";
+
+        List<Post> findAllPost = findAll();
+        if(findAllPost.size() == 0) {
+            post.setId(1L);
+        } else {
+            Long preId = findAllPost.get(findAllPost.size()-1).getId();
+            post.setId(++preId);
+        }
+
+        LocalDate today = LocalDate.now();
+        String date = today.toString();
+        post.setDate(date);
+
         template.update(sql, post.getId(), post.getTitle(), post.getName(), post.getDate(), post.getContent());
         return post;
     }
@@ -35,9 +49,11 @@ public class JdbcRepository implements Repository{
         return template.query(sql, postRowMapper());
     }
     @Override
-    public void update(Long id, String title, String content) {
-        String sql = "update POST set title = ?, content = ? where id = ?";
-        template.update(sql, title, content, id);
+    public void update(Long id, Post post) {
+        String sql = "update POST set title = ?, name = ?, content = ? where id = ?";
+        System.out.println("post = in update func" + post);
+        template.update(sql, post.getTitle(), post.getName(), post.getContent(), id);
+        System.out.println("post = " + findById(id));
     }
 
     @Override

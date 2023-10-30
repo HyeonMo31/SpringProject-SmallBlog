@@ -60,7 +60,9 @@ class JdbcRepositoryTest {
     void update() {
         Post post = new Post(1L, "title", "hyeonMo", "2023-08-25", "아무 내용");
         jdbcRepository.save(post);
-        jdbcRepository.update(1L, "수정된 타이틀", "내용 바꿈");
+        post.setTitle("수정된 타이틀");
+        post.setContent("내용 바꿈");
+        jdbcRepository.update(1L, post);
 
         Post updatedPost = jdbcRepository.findById(1L);
         Assertions.assertThat(updatedPost.getTitle()).isEqualTo("수정된 타이틀");

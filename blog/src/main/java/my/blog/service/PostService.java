@@ -20,8 +20,16 @@ public class PostService {
         return post;
     }
 
-    public List<Post> findList() {
+    public List<Post> findAllList() {
         return repository.findAll();
+    }
+
+    public Post readById(Long id){
+        return repository.findById(id);
+    }
+
+    public void update(Long id, Post post) {
+        repository.update(id, post);
     }
 
 }

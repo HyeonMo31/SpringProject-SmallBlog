@@ -6,7 +6,7 @@ public interface Repository {
     Post save(Post post);
     Post findById(Long id);
     List<Post> findAll();
-    void update(Long id, String title, String content);
+    void update(Long id, Post post);
     void delete(Long id);
 
 }

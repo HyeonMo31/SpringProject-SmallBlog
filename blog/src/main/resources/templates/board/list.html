@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+ .container {
+ max-width: 560px;
+ }
+ </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>글 상세</h2>
+    </div>
+    <!-- 추가 -->
+    <!--    <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>-->
+
+    <div>
+        <label for="itemId">글 번호</label>
+        <input type="text" id="itemId" name="itemId" class="form-control"
+               value="1" th:value="${item.id}" readonly>
+    </div>
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" class="form-control"
+               value="제목" th:value="${item.title}" readonly>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 48%">
+            <label for="name">작성자</label>
+            <input type="text" id="name" name="name" class="form-control"
+                   value="아무개" th:value="${item.name}" readonly>
+        </div>
+        <div style="width: 48%">
+            <label for="name">작성일</label>
+            <input type="text" id="date" name="date" class="form-control"
+                   value="2023-08-07" th:value="${item.date}" readonly>
+        </div>
+    </div>
+    <div>
+        <label for="content">글 내용</label>
+<!--        <input type="text" id="content" name="content" class="form-control"-->
+<!--               value="10" th:value="${item.content}" readonly>-->
+        <textarea type="text" id="content" name="content" class="form-control"
+                  rows="8" style="resize: none" th:text="${item.content}" readonly></textarea>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{/board/list/{itemId}/edit(itemId=${item.id})}'|" type="button">글 수정</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/board}'|"
+                    type="button">목록으로</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

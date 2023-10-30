@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link href="../css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container" style="max-width: 800px">
@@ -22,9 +23,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${items}">
-                <td><a href="item.html" th:href="@{/basic/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">글 번호</a></td>
-                <td><a href="item.html" th:href="@{|/basic/items/${item.id}|}" th:text="${item.title}">제목</a></td>
+            <tr class="trBackground" th:each="item : ${items}">
+                <td th:text="${item.id}">글 번호</td>
+                <td id="titleDeco" th:onclick="|location.href='@{|/board/list/${item.id}|}'|" th:text="${item.title}">제목</td>
                 <td th:text="${item.name}">작성자</td>
                 <td th:text="${item.date}">작성일</td>
             </tr>
